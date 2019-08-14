@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>prueba</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-img id="op" src="https://firebasestorage.googleapis.com/v0/b/firestorage-6b327.appspot.com/o/images%2Fb7ycp5q8o49?alt=media&token=2fd8eb16-b223-4b0e-8714-37253db291a9"></ion-img>
+ <ion-card *ngFor="let element of sh ">
+     <ion-card-header>
+        <ion-img id="url" src="{{element.clientes.Url}}"></ion-img>
+     </ion-card-header>
+     <ion-card-content>
+         <ion-label id="name">{{element.clientes.Nombre}}</ion-label>
+         <ion-list>
+             <ion-item>
+                 <ion-label></ion-label>
+                 <ion-radio id="active" checked="{{element.clientes.Activo}}"></ion-radio>
+             </ion-item>
+             <ion-item>
+                 <ion-label></ion-label>
+                 <ion-radio id="inactive" checked="{{element.clientes.Inactivo}}"></ion-radio>
+             </ion-item>
+         </ion-list>
+
+     </ion-card-content>
+ </ion-card>
+
+  <ion-button href="/home"></ion-button>
+</ion-content>
