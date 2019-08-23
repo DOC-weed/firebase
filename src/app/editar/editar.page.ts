@@ -16,6 +16,10 @@ export class EditarPage implements OnInit {
 uploadProgress: Observable<number>;
 uploadURL: Observable<string>;
 file: any;
+imagen: string;
+nombre: string;
+activoo: boolean;
+inactivoo: boolean;
 clientes: {
     Nombre: string;
     Url: string;
@@ -28,7 +32,8 @@ clientes: {
               private ms: MetodosService) { }
 
   ngOnInit() {
-      this.ms.update1(this.clientes);
+// this.showdatos();
+      this.showx2();
   }
 upload(event) {
      this.file = event.target.files[0];
@@ -76,5 +81,17 @@ async pepe() {
           cssClass: 'custom-class custom-loading'
       });
       return await loading.present();
+}
+/* showdatos() {
+      this.ms.datosclinetes();
+      this.nombre = this.ms.oldCliente.name;
+      this.imagen = this.ms.oldCliente.url;
+      this.activoo = this.ms.oldCliente.act;
+      this.inactivoo = this.ms.oldCliente.inact;
+}
+
+ */
+showx2() {
+    this.ms.showx2();
 }
 }

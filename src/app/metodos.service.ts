@@ -8,7 +8,8 @@ import {AngularFirestore} from '@angular/fire/firestore';
   providedIn: 'root'
 })
 export class MetodosService {
-    data: '';
+    datas: '';
+    wea: any[];
     newCliente: {
         name: string,
         url: string,
@@ -24,17 +25,34 @@ export class MetodosService {
 
   constructor(private storage: AngularFireStorage, private db: AngularFirestore) { }
   update(id) {
-      this.data = id;
+      this.datas = id;
   }
-update1(client) {
+  showx2() {
+      const sh = this.db.collection('prueba');
+      console.log(sh);
+  }
+
+/* update1(client) {
       this.newCliente.url = client[0];
       this.newCliente.name = client[1];
       this.newCliente.act = client[2];
       this.newCliente.inact = client[3];
+      return client;
 }
 
+ */
+/*datosclinetes() {
+      this.oldCliente.url = this.newCliente.url;
+      this.oldCliente.name = this.newCliente.name;
+      this.oldCliente.act = this.newCliente.act;
+      this.oldCliente.inact = this.newCliente.inact;
+      return this.oldCliente;
+}
+
+ */
+
   update2() {
-      this.db.collection('pruebas').doc(this.data).set({
+      this.db.collection('pruebas').doc(this.datas).set({
           Nombre: this.newCliente.name,
           URL: this.newCliente.url,
           Activo: this.newCliente.act,

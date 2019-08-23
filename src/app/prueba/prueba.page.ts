@@ -54,17 +54,19 @@ show() {
       this.searchText = event.detail.value;
       }
       // obtener datos para update
-      sendData() {
-      const id = (document.getElementById('id') as HTMLIonLabelElement).textContent;
-      const client = [];
+      sendData(id) {
+      /* const client = [];
       client[0] = (document.getElementById('img') as HTMLImageElement).src;
       client[1] = (document.getElementById('name')as HTMLIonLabelElement).textContent;
       client[2] = (document.getElementById('active')as HTMLIonRadioElement).checked;
       client[3] = (document.getElementById('inactive')as HTMLIonRadioElement).checked;
-      this.ms.update(id);
-      this.ms.update1(client);
+
+       */
+      // this.ms.update(id);
+      // this.ms.update1(client);
       console.log(id);
-      console.log(client);
+      // console.log(client);
+
       }
 }
 
