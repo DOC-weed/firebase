@@ -8,18 +8,16 @@
 
 <ion-content>
     <ion-item>
-    <img id="output" [src]="uploadImage" class="size" />
+    <img id="output" src="../../assets/images/user.png" class="size"/>
     </ion-item>
   <ion-item>
   <ion-label >Seleccione imagen</ion-label>
-  </ion-item>
-  <ion-item >
     <ion-input type="file" (change)="upload($event)" id="img" accept="image/*" ></ion-input>
-    <ion-buttons fill="clear">
-     <button  fill="clear">
-        <ion-icon color="primary"  slot="icon-only" size="large" name="camera"></ion-icon>
+    <ion-buttons slot="end">
+    <button>
+       <ion-icon slot="icon-only" name="camera" size="large"></ion-icon>
       </button>
-      <button fill="clear" (click)="deleteimage()" >
+      <button (click)="deleteimage()">
         <ion-icon color="danger"  slot="icon-only" size="large" name="trash"></ion-icon>
       </button>
     </ion-buttons>
@@ -43,9 +41,63 @@
     </ion-item>
   </ion-radio-group>
   </ion-list>
-  <ion-button (click)="uploadw()" >Aceptar</ion-button>
-  <ion-button href="/mostarimagen">mostar imagenes</ion-button>
-  <ion-button href="/home">home</ion-button>
-  <ion-button href="/prueba">prueba
+  <ion-button expand="full" (click)="uploadw()" >Aceptar</ion-button>
+  <ion-button shape="round" href="/prueba">prueba</ion-button>
+  <ion-button (click)="pepe()">alerta</ion-button>
+<!--
+  <ion-button>Default</ion-button>
+
+  <ion-button href="#">Anchor</ion-button>
+
+
+  <ion-button color="primary">Primary</ion-button>
+  <ion-button color="secondary">Secondary</ion-button>
+  <ion-button color="tertiary">Tertiary</ion-button>
+  <ion-button color="success">Success</ion-button>
+  <ion-button color="warning">Warning</ion-button>
+  <ion-button color="danger">Danger</ion-button>
+  <ion-button color="light">Light</ion-button>
+  <ion-button color="medium">Medium</ion-button>
+  <ion-button color="dark">Dark</ion-button>
+
+  <ion-button expand="full">Full Button</ion-button>
+  <ion-button expand="block">Block Button</ion-button>
+
+
+  <ion-button shape="round">Round Button</ion-button>
+
+
+  <ion-button expand="full" fill="outline">Outline + Full</ion-button>
+  <ion-button expand="block" fill="outline">Outline + Block</ion-button>
+  <ion-button shape="round" fill="outline">Outline + Round</ion-button>
+
+
+  <ion-button>
+    <ion-icon slot="start" name="star"></ion-icon>
+    Left Icon
   </ion-button>
+
+  <ion-button>
+    Right Icon
+    <ion-icon slot="end" name="star"></ion-icon>
+  </ion-button>
+
+  <ion-button>
+    <ion-icon slot="icon-only" name="star"></ion-icon>
+  </ion-button>
+
+
+  <ion-button size="large">Large</ion-button>
+  <ion-button>Default</ion-button>
+  <ion-button size="small">Small</ion-button>
+
+
+-->
+
+
+
+
+
+
+
 </ion-content>
