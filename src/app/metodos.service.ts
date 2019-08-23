@@ -26,6 +26,12 @@ export class MetodosService {
   update(id) {
       this.data = id;
   }
+update1(client) {
+      this.newCliente.url = client[0];
+      this.newCliente.name = client[1];
+      this.newCliente.act = client[2];
+      this.newCliente.inact = client[3];
+}
 
   update2() {
       this.db.collection('pruebas').doc(this.data).set({

@@ -62,10 +62,9 @@ show() {
       client[2] = (document.getElementById('active')as HTMLIonRadioElement).checked;
       client[3] = (document.getElementById('inactive')as HTMLIonRadioElement).checked;
       this.ms.update(id);
-
+      this.ms.update1(client);
       console.log(id);
       console.log(client);
-
       }
 }
 

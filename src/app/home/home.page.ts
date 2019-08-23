@@ -21,10 +21,11 @@ export class HomePage {
     uploadProgress: Observable<number>;
     uploadURL: Observable<string>;
     uploadImage: string | ArrayBuffer;
-    image: string;
+    /*image: string;
     name: string;
     active: boolean;
     inactive: boolean;
+     */
     file: any;
     clientes: {
         Nombre: string;
@@ -54,7 +55,7 @@ export class HomePage {
         reader.readAsDataURL(input.files[0]);
     }
 
-    async uploadw() {
+    uploadw() {
 
 try {
             this.pepe();
