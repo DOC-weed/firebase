@@ -17,6 +17,8 @@ import * as firebase from 'firebase';
 import {NavController} from '@ionic/angular';
 import {ActivatedRoute} from '@angular/router';
 import {PipesModule} from './pipes/pipes.module';
+import {EditarPageModule} from './editar/editar.module';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +26,8 @@ import {PipesModule} from './pipes/pipes.module';
   // tslint:disable-next-line:max-line-length
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireStorageModule, AngularFirestoreModule, PipesModule],
+    AngularFireStorageModule, AngularFirestoreModule, PipesModule,
+    EditarPageModule],
   providers: [
     StatusBar,
     SplashScreen,

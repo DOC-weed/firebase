@@ -1,12 +1,6 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Editar Cliente</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
+<ion-content padding>
   <ion-item>
-    <img id="output" src="../../assets/images/user.png" class="size"/>
+    <img  id="output"  [(ngModel)]="popo" src="{{popo}}" class="size"/>
   </ion-item>
   <ion-item>
     <ion-label >Seleccione imagen</ion-label>
@@ -21,8 +15,8 @@
     </ion-buttons>
   </ion-item>
   <ion-item>
-    <ion-label position="floating" [(ngModel)]="nombre">Nombre</ion-label>
-    <ion-input type="text" id="name"></ion-input>
+    <ion-label position="floating" >Nombre</ion-label>
+    <ion-input type="text" id="name" [(ngModel)]="nombre"></ion-input>
   </ion-item>
   <ion-list>
     <ion-radio-group>
@@ -41,5 +35,6 @@
   </ion-list>
   <ion-button expand="full" (click)="uploadw()" >Aceptar</ion-button>
   <ion-button href="/prueba">volver</ion-button>
+  <ion-button (click)="dismiss()"></ion-button>
 
 </ion-content>

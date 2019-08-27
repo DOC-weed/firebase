@@ -25,10 +25,23 @@ export class MetodosService {
 
   constructor(private storage: AngularFireStorage, private db: AngularFirestore) { }
   update(id) {
-      this.datas = id;
+      const datas = id;
+      return datas;
   }
-  showx2() {
-      const sh = this.db.collection('prueba');
+  showx2(id) {
+      const sh = this.db.collection('prueba').doc(id);
+      /* sh.update({
+          Nombre: '',
+          Url: '' ,
+          Activo: true,
+          Inactivo: false
+      });
+
+       */
+      sh.get().toPromise().then( function(doc) {
+          console.log(doc.data());
+      });
+
       console.log(sh);
   }
 
@@ -58,5 +71,12 @@ export class MetodosService {
           Activo: this.newCliente.act,
           Inactivo: this.newCliente.inact
       });
+  }
+   saveimg(src) {
+      const img = src;
+      this.datas = img;
+      console.log(img);
+      console.log(this.datas);
+      return img;
   }
 }
