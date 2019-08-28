@@ -11,7 +11,7 @@
          <ion-item>
              <ion-button slot="start" size="small" shape="round">Ver Cliente</ion-button>
              <ion-label id="id">{{element.id}}</ion-label>
-             <ion-button slot="end" size="small" (focus)="saveimage(element)" (click)="sendData($event)">Editar</ion-button>
+             <ion-button slot="end" size="small" (focus)="saveimage(element.clientes)" (click)="sendData(element.id)">Editar</ion-button>
          </ion-item>
         <img class="images" id="img" src="{{element.clientes.Url2}}"/>
      </ion-card-header>

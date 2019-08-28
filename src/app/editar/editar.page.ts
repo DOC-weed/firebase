@@ -16,8 +16,8 @@ export class EditarPage implements OnInit {
     uploadProgress: Observable<number>;
     uploadURL: Observable<string>;
     file: any;
-    data: '';
-    imagen: string;
+    data: string;
+    // imagen: string;
     nombre: string;
     activoo: boolean;
     inactivoo: boolean;
@@ -43,12 +43,13 @@ export class EditarPage implements OnInit {
         this.file = event.target.files[0];
         const input = event.taget;
         const reader = new FileReader();
-        reader.onload = function () {
+        // tslint:disable-next-line:only-arrow-functions
+        reader.onload = function() {
             const dataURL = reader.result;
             const output = (document.getElementById('output') as HTMLImageElement);
             if (typeof dataURL === 'string') {
-                output.src = dataURL;
-            }
+            output.src = dataURL;
+        }
         };
         reader.readAsDataURL(input.files[0]);
     }
@@ -64,13 +65,12 @@ export class EditarPage implements OnInit {
         task.snapshotChanges().pipe(
             finalize(() => this.uploadURL = fileRef.getDownloadURL())
         ).subscribe();
-        this.clientes = {
-            Nombre: (document.getElementById('name') as HTMLIonInputElement).value.toLowerCase(),
+        this.AFS.collection('prueba').doc(this.data).update({
+            Nombre: this.nombre,
             Url: filepath,
             Activo: (document.getElementById('active') as HTMLIonRadioElement).checked,
             Inactivo: (document.getElementById('inactive') as HTMLIonRadioElement).checked
-        };
-        this.AFS.collection('prueba').doc().update(this.clientes).then(res => alert('Cliente Actualizado'));
+        }).then(res => alert('Cliente Actualizado'));
     }
 
     deleteimage() {
@@ -83,7 +83,7 @@ export class EditarPage implements OnInit {
         const loading = await this.LoadController.create({
             spinner: 'circles',
             duration: 3000,
-            message: 'Agregando cliente...',
+            message: 'Actualizando Datos...',
             translucent: true,
             cssClass: 'custom-class custom-loading'
         });
@@ -102,8 +102,7 @@ export class EditarPage implements OnInit {
     showx2() {
         this.popo = localStorage.getItem('img');
         this.nombre = localStorage.getItem('nombre');
-        this.activoo = JSON.parse(localStorage.getItem('activo'));
-        this.inactivoo = JSON.parse(localStorage.getItem('inactivo'));
+        this.data = localStorage.getItem('id');
     }
 
     dismiss() {

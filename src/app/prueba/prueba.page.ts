@@ -63,10 +63,10 @@ export class PruebaPage implements OnInit {
     }
 
     //
-    async sendData(ev: any) {
+    async sendData(id) {
+        localStorage.setItem('id', id);
         const popov = await this.popover.create({
             component: EditarPage,
-            event: ev,
             cssClass: 'custom-css'
         });
         return await popov.present();
@@ -84,12 +84,12 @@ export class PruebaPage implements OnInit {
         // console.log(client);
 
     }
-    saveimage(element) {
-        localStorage.setItem('nombre', element.cliente.Nombre);
-        localStorage.setItem('activo', element.cliente.Activo);
-        localStorage.setItem('inactivo', element.cliente.Inactivo);
-        localStorage.setItem('img', element.cliente.Url2);
-        localStorage.setItem('pp', element.id);
+    saveimage(cliente) {
+        // localStorage.setItem('pp', element.id);
+        localStorage.setItem('nombre', cliente.Nombre);
+        localStorage.setItem('activo', cliente.Activo);
+        localStorage.setItem('inactivo', cliente.Inactivo);
+        localStorage.setItem('img', cliente.Url2);
     }
     /* senddatos(id) {
         this.ms.showx2(id);
