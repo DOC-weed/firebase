@@ -74,7 +74,7 @@ export class EditarPage implements OnInit {
                     Url: filepath,
                     Activo:  this.activoo/*(document.getElementById('active') as HTMLIonRadioElement).checked*/,
                     Inactivo: this.inactivoo /*(document.getElementById('inactive') as HTMLIonRadioElement).checked*/
-                }).then(res => alert('Cliente Actualizado'));
+                });
                 const ref = localStorage.getItem('refSt');
                 this.storage.ref(ref).delete();
                 this.pepe();

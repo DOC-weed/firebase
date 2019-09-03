@@ -22,6 +22,7 @@ export class HomePage implements OnInit {
     uploadURL: Observable<string>;
     uploadImage: string | ArrayBuffer;
     file: any;
+    inputname: string;
     clientes: {
         Nombre: string;
         Url: string;
@@ -53,11 +54,11 @@ export class HomePage implements OnInit {
     }
 
     uploadw() {
-
-try {
-            if (this.clientes.Nombre === '' ) {
-                alert('Ingrese nombre');
-            } else {
+        const n = (document.getElementById('name')as HTMLIonInputElement).value;
+        if (n === '') {
+            this.disabled();
+        } else {
+            try {
                 const randomId = Math.random().toString(36).substring(2, 9);
                 console.log(randomId);
                 const filepath = `images/${randomId}`;
@@ -76,9 +77,11 @@ try {
                 this.AFS.collection('prueba').add(this.clientes).then(res =>
                     alert('Cliente Agregado'));
                 this.pepe();
+                this.deleteimage();
+                this.inputname = '';
+            } catch {
+                alert('Ingrese nombre e imagen');
             }
-        } catch {
-            alert('Ingrese nombre e imagen');
         }
     }
 
@@ -98,6 +101,17 @@ try {
             cssClass: 'custom-class custom-loading'
         });
         return  await loading.present();
+    }
+    disabled() {
+        const name = (document.getElementById('name') as HTMLIonInputElement).value;
+        if (name === '') {
+           alert('ingrese nombre');
+       } else
+        if (name.length > 0) {
+            (document.getElementById('btn')as HTMLIonButtonElement).disabled = false;
+        } else {
+            (document.getElementById('btn') as HTMLIonButtonElement).disabled = true;
+        }
     }
 
 }
