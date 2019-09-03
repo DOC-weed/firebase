@@ -12,7 +12,7 @@
              <ion-button (click)="delete(element.id)" color="danger" slot="end" size="small" shape="round">
                  <ion-icon name="trash" slot="icon-only"></ion-icon>
              </ion-button>
-             <ion-button slot="start" size="small" (focus)="saveimage(element.clientes)" (click)="sendData(element.id)"><ion-icon name="build" ></ion-icon> Editar</ion-button>
+             <ion-button slot="start" size="small" shape="round" (focus)="saveimage(element.clientes)" (click)="sendData(element.id)"><ion-icon name="build" ></ion-icon> Editar</ion-button>
          </ion-item>
         <img class="images" id="img" src="{{element.clientes.Url2}}"/>
      </ion-card-header>

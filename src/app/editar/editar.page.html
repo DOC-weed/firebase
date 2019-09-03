@@ -10,13 +10,13 @@
         <ion-icon slot="icon-only" name="camera" size="large"></ion-icon>
       </button>
       <button (click)="deleteimage()">
-        <ion-icon color="danger"  slot="icon-only" size="large" name="trash"></ion-icon>
+        <ion-icon color="danger" slot="icon-only" size="large" name="trash"></ion-icon>
       </button>
     </ion-buttons>
   </ion-item>
   <ion-item>
     <ion-label>Nombre</ion-label>
-    <ion-input type="text" [(ngModel)]="nombre" id="name"></ion-input>
+    <ion-input type="text" [(ngModel)]="nombre" (keyup)="disabled()" ></ion-input>
   </ion-item>
   <ion-list>
     <ion-radio-group>
@@ -25,15 +25,15 @@
       </ion-list-header>
       <ion-item>
         <ion-label>Activo</ion-label>
-        <ion-radio  id="active" color="success" (change)="getvalue({})" slot="start"  checked></ion-radio>
+        <ion-radio  id="active" color="success" (change)="getvalue($event)" slot="start" checked></ion-radio>
       </ion-item>
       <ion-item>
         <ion-label>Inactivo</ion-label>
-        <ion-radio id="inactive" color="medium" (change)="getvalue2({})" slot="start" ></ion-radio>
+        <ion-radio id="inactive" (change)="getvalue2($event)"  color="medium" slot="start"  ></ion-radio>
       </ion-item>
     </ion-radio-group>
   </ion-list>
-  <ion-button  (click)="uploadw()">Aceptar</ion-button>
+  <ion-button id="btn" (click)="uploadw()">Aceptar</ion-button>
   <ion-button color="danger" (click)="dismiss()">Cancelar</ion-button>
 
 </ion-content>

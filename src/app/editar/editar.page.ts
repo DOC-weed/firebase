@@ -15,6 +15,8 @@ export class EditarPage implements OnInit {
     uploadProgress: Observable<number>;
     uploadURL: Observable<string>;
     file: any;
+    act: boolean;
+    inac: boolean;
     data: string;
     nombre: string;
     activoo: boolean;
@@ -47,42 +49,48 @@ export class EditarPage implements OnInit {
         reader.readAsDataURL(input.files[0]);
     }
     uploadw() {
-       try {
-        const url = (document.getElementById('output') as HTMLImageElement).src;
-        console.log(url);
-        console.log(this.popo);
-        if (url === this.popo) {
-                this.AFS.collection('prueba').doc(this.data).update({
-                    Nombre: this.nombre,
-                    Activo: (document.getElementById('active') as HTMLIonRadioElement).checked,
-                    Inactivo: (document.getElementById('inactive') as HTMLIonRadioElement).checked
-                }).then(res => alert('Cliente Actualizado'));
-                this.pepe();
-                this.dismiss();
-            } else {
-                const randomId = Math.random().toString(36).substring(2, 9);
-                console.log(randomId);
-                const filepath = `images/${randomId}`;
-                const fileRef = this.storage.ref(filepath);
-                const task = this.storage.upload(filepath, this.file);
-                this.uploadProgress = task.percentageChanges();
-                task.snapshotChanges().pipe(
-                    finalize(() => this.uploadURL = fileRef.getDownloadURL())
-                ).subscribe();
-                this.AFS.collection('prueba').doc(this.data).update({
-                    Nombre: this.nombre.toLowerCase(),
-                    Url: filepath,
-                    Activo:  this.activoo/*(document.getElementById('active') as HTMLIonRadioElement).checked*/,
-                    Inactivo: this.inactivoo /*(document.getElementById('inactive') as HTMLIonRadioElement).checked*/
-                });
-                const ref = localStorage.getItem('refSt');
-                this.storage.ref(ref).delete();
-                this.pepe();
-                this.dismiss();
-            }
-
-         } catch {
-            alert('Datos incompletos, por favor ingrese datos');
+        if (this.nombre === '') {
+            this.disabled();
+        }  else {
+            try {
+                const url = (document.getElementById('output') as HTMLImageElement).src;
+                console.log(this.popo);
+                if (url === this.popo) {
+                    console.log(this.activoo);
+                    console.log(this.inactivoo);
+                    this.AFS.collection('prueba').doc(this.data).update({
+                        Nombre: this.nombre,
+                        Activo: this.activoo/*(document.getElementById('active') as HTMLIonRadioElement).checked*/,
+                        Inactivo: this.inactivoo/*(document.getElementById('inactive') as HTMLIonRadioElement).checked*/
+                    }).then(res => alert('Cliente Actualizado'));
+                    this.pepe();
+                    this.dismiss();
+                } else {
+                    const randomId = Math.random().toString(36).substring(2, 9);
+                    console.log(randomId);
+                    const filepath = `images/${randomId}`;
+                    const fileRef = this.storage.ref(filepath);
+                    const task = this.storage.upload(filepath, this.file);
+                    this.uploadProgress = task.percentageChanges();
+                    task.snapshotChanges().pipe(
+                        finalize(() => this.uploadURL = fileRef.getDownloadURL())
+                    ).subscribe();
+                    console.log(this.activoo);
+                    console.log(this.inactivoo);
+                    this.AFS.collection('prueba').doc(this.data).update({
+                        Nombre: this.nombre.toLowerCase(),
+                        Url: filepath,
+                        Activo: this.activoo/*(document.getElementById('active') as HTMLIonRadioElement).checked*/,
+                        Inactivo: this.inactivoo /*(document.getElementById('inactive') as HTMLIonRadioElement).checked*/
+                    });
+                    const ref = localStorage.getItem('refSt');
+                    this.storage.ref(ref).delete();
+                    this.pepe();
+                    this.dismiss();
+                }
+            } catch {
+                alert('Datos incompletos, por favor ingrese datos');
+             }
         }
     }
 
@@ -106,15 +114,28 @@ export class EditarPage implements OnInit {
         this.popo = localStorage.getItem('img');
         this.nombre = localStorage.getItem('nombre');
         this.data = localStorage.getItem('id');
+        this.act = JSON.parse(localStorage.getItem('acivo'));
+        this.inac = JSON.parse(localStorage.getItem('inac'));
     }
 // Cerrar popover
     dismiss() {
         this.popover.dismiss();
     }
-    getvalue(checked) {
-        this.activoo = checked;
+    getvalue(event) {
+        this.activoo = event.checked;
     }
-    getvalue2(cheked) {
-        this.inactivoo = cheked;
+    getvalue2(event) {
+        this.inactivoo = event.checked;
+    }
+    disabled() {
+        const name = (document.getElementById('name') as HTMLIonInputElement).value;
+        if (this.nombre === '') {
+            alert('ingrese nombre');
+        } else
+        if (this.nombre.length > 0) {
+            (document.getElementById('btn')as HTMLIonButtonElement).disabled = false;
+        } else {
+            (document.getElementById('btn') as HTMLIonButtonElement).disabled = true;
+        }
     }
 }

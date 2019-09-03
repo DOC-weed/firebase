@@ -80,7 +80,7 @@ export class HomePage implements OnInit {
                 this.deleteimage();
                 this.inputname = '';
             } catch {
-                alert('Ingrese nombre e imagen');
+                alert('Ingrese imagen');
             }
         }
     }
