@@ -55,25 +55,29 @@ export class HomePage implements OnInit {
     uploadw() {
 
 try {
-            const randomId = Math.random().toString(36).substring(2, 9);
-            console.log(randomId);
-            const filepath = `images/${randomId}`;
-            const fileRef = this.storage.ref(filepath);
-            const task = this.storage.upload(filepath, this.file);
-            this.uploadProgress = task.percentageChanges();
-            task.snapshotChanges().pipe(
-                finalize(() => this.uploadURL = fileRef.getDownloadURL())
-            ).subscribe();
-            this.clientes = {
-                Nombre: (document.getElementById('name') as HTMLInputElement).value.toLowerCase(),
-                Url: filepath,
-                Activo: (document.getElementById('active') as HTMLIonRadioElement).checked,
-                Inactivo: (document.getElementById('inactive') as HTMLIonRadioElement).checked
-            };
-            this.AFS.collection('prueba').add(this.clientes).then(res =>
-                alert('Cliente Agregado'));
-            this.pepe();
-        } catch (res) {
+            if (this.clientes.Nombre === '' ) {
+                alert('Ingrese nombre');
+            } else {
+                const randomId = Math.random().toString(36).substring(2, 9);
+                console.log(randomId);
+                const filepath = `images/${randomId}`;
+                const fileRef = this.storage.ref(filepath);
+                const task = this.storage.upload(filepath, this.file);
+                this.uploadProgress = task.percentageChanges();
+                task.snapshotChanges().pipe(
+                    finalize(() => this.uploadURL = fileRef.getDownloadURL())
+                ).subscribe();
+                this.clientes = {
+                    Nombre: (document.getElementById('name') as HTMLInputElement).value.toLowerCase(),
+                    Url: filepath,
+                    Activo: (document.getElementById('active') as HTMLIonRadioElement).checked,
+                    Inactivo: (document.getElementById('inactive') as HTMLIonRadioElement).checked
+                };
+                this.AFS.collection('prueba').add(this.clientes).then(res =>
+                    alert('Cliente Agregado'));
+                this.pepe();
+            }
+        } catch {
             alert('Ingrese nombre e imagen');
         }
     }

@@ -70,11 +70,11 @@ export class EditarPage implements OnInit {
                     finalize(() => this.uploadURL = fileRef.getDownloadURL())
                 ).subscribe();
                 this.AFS.collection('prueba').doc(this.data).update({
-                    Nombre: this.nombre,
+                    Nombre: this.nombre.toLowerCase(),
                     Url: filepath,
-                    Activo: (document.getElementById('active') as HTMLIonRadioElement).checked,
-                    Inactivo: (document.getElementById('inactive') as HTMLIonRadioElement).checked
-                }).then(res => alert('Cliente Actualizado'))
+                    Activo:  this.activoo/*(document.getElementById('active') as HTMLIonRadioElement).checked*/,
+                    Inactivo: this.inactivoo /*(document.getElementById('inactive') as HTMLIonRadioElement).checked*/
+                }).then(res => alert('Cliente Actualizado'));
                 const ref = localStorage.getItem('refSt');
                 this.storage.ref(ref).delete();
                 this.pepe();
@@ -111,8 +111,10 @@ export class EditarPage implements OnInit {
     dismiss() {
         this.popover.dismiss();
     }
-    blankfield() {
-
+    getvalue(checked) {
+        this.activoo = checked;
     }
-
+    getvalue2(cheked) {
+        this.inactivoo = cheked;
+    }
 }
