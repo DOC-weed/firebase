@@ -1,10 +1,10 @@
 <ion-content padding>
   <ion-item>
-    <img  id="output"  src="{{popo}}" class="size"/>
+    <img  id="output" src="{{popo}}" class="size"/>
   </ion-item>
   <ion-item>
     <ion-label >Seleccione imagen</ion-label>
-    <ion-input type="file" (change)="upload($event)" id="img" accept="image/*"></ion-input>
+    <ion-input type="file" (change)="upload($event)" id="img" mode="ios"></ion-input>
     <ion-buttons slot="end">
       <button>
         <ion-icon slot="icon-only" name="camera" size="large"></ion-icon>
@@ -15,7 +15,7 @@
     </ion-buttons>
   </ion-item>
   <ion-item>
-    <ion-label position="floating">Nombre</ion-label>
+    <ion-label>Nombre</ion-label>
     <ion-input type="text" [(ngModel)]="nombre" id="name"></ion-input>
   </ion-item>
   <ion-list>
@@ -25,16 +25,15 @@
       </ion-list-header>
       <ion-item>
         <ion-label>Activo</ion-label>
-        <ion-radio  id="active" color="success" slot="start" checked></ion-radio>
+        <ion-radio  id="active" color="success" slot="start"  checked></ion-radio>
       </ion-item>
       <ion-item>
         <ion-label>Inactivo</ion-label>
-        <ion-radio id="inactive" color="medium" slot="start"></ion-radio>
+        <ion-radio id="inactive" color="medium" slot="start" ></ion-radio>
       </ion-item>
     </ion-radio-group>
   </ion-list>
-  <ion-button expand="full" (click)="uploadw()">Aceptar</ion-button>
-  <ion-button href="/prueba">volver</ion-button>
-  <ion-button (click)="dismiss()"></ion-button>
+  <ion-button  (click)="uploadw()">Aceptar</ion-button>
+  <ion-button color="danger" (click)="dismiss()">Cancelar</ion-button>
 
 </ion-content>

@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {AngularFireStorageReference} from '@angular/fire/storage';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {Observable} from 'rxjs';
-import {forEach} from '@angular-devkit/schematics';
 
-import {PopoverController} from '@ionic/angular';
+
+import {AlertController, LoadingController, PopoverController} from '@ionic/angular';
 import {EditarPage} from '../editar/editar.page';
 
 
@@ -23,8 +22,11 @@ export class PruebaPage implements OnInit {
     lawealoca: '';
 
 
-    constructor(public bd: AngularFirestore, private storage: AngularFireStorage,
-                private popover: PopoverController) {
+    constructor(public bd: AngularFirestore,
+                private storage: AngularFireStorage,
+                private popover: PopoverController,
+                private alertctrl: AlertController,
+                private LoadCtrl: LoadingController) {
     }
 
     ngOnInit() {
@@ -62,7 +64,7 @@ export class PruebaPage implements OnInit {
         this.searchText = event.detail.value;
     }
 
-    //
+    // Disparar Popover
     async sendData(id) {
         localStorage.setItem('id', id);
         const popov = await this.popover.create({
@@ -71,47 +73,39 @@ export class PruebaPage implements OnInit {
         });
         return await popov.present();
 
-        /* const client = [];
-        client[0] = (document.getElementById('img') as HTMLImageElement).src;
-        client[1] = (document.getElementById('name')as HTMLIonLabelElement).textContent;
-        client[2] = (document.getElementById('active')as HTMLIonRadioElement).checked;
-        client[3] = (document.getElementById('inactive')as HTMLIonRadioElement).checked;
-
-         */
-        // this.ms.update(id);
-        // this.ms.update1(client);
-        // console.log(id);
-        // console.log(client);
-
     }
+    // Guardar datos de clientes en el Storage
     saveimage(cliente) {
-        // localStorage.setItem('pp', element.id);
         localStorage.setItem('nombre', cliente.Nombre);
         localStorage.setItem('activo', cliente.Activo);
         localStorage.setItem('inactivo', cliente.Inactivo);
         localStorage.setItem('img', cliente.Url2);
+        localStorage.setItem('refSt', cliente.Url);
     }
-    /* senddatos(id) {
-        this.ms.showx2(id);
-        console.log(id);
-         const sh = this.bd.collection('prueba').doc(id);
-        // tslint:disable-next-line:only-arrow-functions
-        sh.get().toPromise().then(function(doc) {
-            if (doc.exists) {
-                console.log('Document data:', doc.data());
-            } else {
-                // doc.data() will be undefined in this case
-                console.log('No such document!');
-            }
-
-
+    // Eliminar clientes
+     async delete(id) {
+        const alert = await this.alertctrl.create({
+            message: '¿Esta seguro de eliminar el cliente?',
+            buttons: [
+                {text: 'Cancelar',
+                role: 'Cancel',
+                handler: blah => {
+                    console.log('confirm cancel: blah');
+                }},
+                {text: 'Confirmar',
+                handler: () => {
+                    this.bd.collection('prueba').doc(id).delete();
+                    const ref = localStorage.getItem('refSt');
+                    this.storage.ref(ref).delete();
+                }}
+            ],
         });
-
-
-
+        return alert.present();
     }
 
-     */
+
+
+
 
 }
 

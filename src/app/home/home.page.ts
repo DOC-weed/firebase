@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {environment} from '../../environments/environment';
 import * as firebase from 'firebase';
 import {Observable} from 'rxjs';
@@ -17,15 +17,10 @@ import { LoadingController} from '@ionic/angular';
   styleUrls: ['home.page.scss'],
     providers: [AngularFirestore]
   })
-export class HomePage {
+export class HomePage implements OnInit {
     uploadProgress: Observable<number>;
     uploadURL: Observable<string>;
     uploadImage: string | ArrayBuffer;
-    /*image: string;
-    name: string;
-    active: boolean;
-    inactive: boolean;
-     */
     file: any;
     clientes: {
         Nombre: string;
@@ -38,6 +33,8 @@ export class HomePage {
         private storage: AngularFireStorage,
         private AFS: AngularFirestore,
         private LoadController: LoadingController) {
+    }
+    ngOnInit() {
     }
 
     upload(event) {
@@ -58,8 +55,7 @@ export class HomePage {
     uploadw() {
 
 try {
-            this.pepe();
-            const randomId = Math.random().toString(36).substring(2);
+            const randomId = Math.random().toString(36).substring(2, 9);
             console.log(randomId);
             const filepath = `images/${randomId}`;
             const fileRef = this.storage.ref(filepath);
@@ -76,6 +72,7 @@ try {
             };
             this.AFS.collection('prueba').add(this.clientes).then(res =>
                 alert('Cliente Agregado'));
+            this.pepe();
         } catch (res) {
             alert('Ingrese nombre e imagen');
         }
@@ -85,7 +82,9 @@ try {
         const img = '../../assets/images/user.png';
         const output = document.getElementById('output') as HTMLImageElement;
         output.src = img;
+        this.file = null;
     }
+
     async pepe() {
         const loading = await this.LoadController.create({
             spinner: 'circles',
@@ -96,5 +95,6 @@ try {
         });
         return  await loading.present();
     }
+
 }
 
