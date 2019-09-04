@@ -32,7 +32,6 @@ export class PruebaPage implements OnInit {
     ngOnInit() {
         this.show();
     }
-
     // mostar todos los datos del arreglo de clientes
     show() {
         const def = this.bd.collection('prueba').snapshotChanges().subscribe(data => {
@@ -43,7 +42,6 @@ export class PruebaPage implements OnInit {
                 };
             });
             console.log(this.sh);
-
             // mostrar imagenes
             for (const clientes of this.sh) {
                 console.log(clientes.clientes.Url);
@@ -72,7 +70,6 @@ export class PruebaPage implements OnInit {
             cssClass: 'custom-css'
         });
         return await popov.present();
-
     }
     // Guardar datos de clientes en el Storage
     saveimage(cliente) {

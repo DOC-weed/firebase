@@ -56,12 +56,14 @@ export class EditarPage implements OnInit {
                 const url = (document.getElementById('output') as HTMLImageElement).src;
                 console.log(this.popo);
                 if (url === this.popo) {
-                    console.log(this.activoo);
-                    console.log(this.inactivoo);
+                    const a = (document.getElementById('active') as HTMLIonRadioElement).checked;
+                    const b = (document.getElementById('inactive') as HTMLIonRadioElement).checked;
+                    console.log(a);
+                    console.log(b);
                     this.AFS.collection('prueba').doc(this.data).update({
                         Nombre: this.nombre,
-                        Activo: this.activoo/*(document.getElementById('active') as HTMLIonRadioElement).checked*/,
-                        Inactivo: this.inactivoo/*(document.getElementById('inactive') as HTMLIonRadioElement).checked*/
+                        Activo: a /*this.activoo*/,
+                        Inactivo: b /*this.inactivoo*/
                     }).then(res => alert('Cliente Actualizado'));
                     this.pepe();
                     this.dismiss();
@@ -75,13 +77,15 @@ export class EditarPage implements OnInit {
                     task.snapshotChanges().pipe(
                         finalize(() => this.uploadURL = fileRef.getDownloadURL())
                     ).subscribe();
-                    console.log(this.activoo);
-                    console.log(this.inactivoo);
+                    const a = (document.getElementById('active') as HTMLIonRadioElement).checked;
+                    const b = (document.getElementById('inactive') as HTMLIonRadioElement).checked;
+                    console.log(a);
+                    console.log(b);
                     this.AFS.collection('prueba').doc(this.data).update({
                         Nombre: this.nombre.toLowerCase(),
                         Url: filepath,
-                        Activo: this.activoo/*(document.getElementById('active') as HTMLIonRadioElement).checked*/,
-                        Inactivo: this.inactivoo /*(document.getElementById('inactive') as HTMLIonRadioElement).checked*/
+                        Activo: a/*this.activoo*/,
+                        Inactivo: b /*this.inactivoo */
                     });
                     const ref = localStorage.getItem('refSt');
                     this.storage.ref(ref).delete();
@@ -114,8 +118,8 @@ export class EditarPage implements OnInit {
         this.popo = localStorage.getItem('img');
         this.nombre = localStorage.getItem('nombre');
         this.data = localStorage.getItem('id');
-        this.act = JSON.parse(localStorage.getItem('acivo'));
-        this.inac = JSON.parse(localStorage.getItem('inac'));
+        this.act = JSON.parse(localStorage.getItem('activo'));
+        this.inac = JSON.parse(localStorage.getItem('inactivo'));
     }
 // Cerrar popover
     dismiss() {
