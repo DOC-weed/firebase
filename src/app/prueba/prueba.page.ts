@@ -28,7 +28,6 @@ export class PruebaPage implements OnInit {
                 private alertctrl: AlertController,
                 private LoadCtrl: LoadingController) {
     }
-
     ngOnInit() {
         this.show();
     }

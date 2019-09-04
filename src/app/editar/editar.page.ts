@@ -56,14 +56,14 @@ export class EditarPage implements OnInit {
                 const url = (document.getElementById('output') as HTMLImageElement).src;
                 console.log(this.popo);
                 if (url === this.popo) {
-                    const a = (document.getElementById('active') as HTMLIonRadioElement).checked;
-                    const b = (document.getElementById('inactive') as HTMLIonRadioElement).checked;
-                    console.log(a);
-                    console.log(b);
+                    this.act = (document.getElementById('active') as HTMLIonRadioElement).checked;
+                    this.inac = (document.getElementById('inactive') as HTMLIonRadioElement).checked.valueOf();
+                    console.log(this.act);
+                    console.log(this.inac);
                     this.AFS.collection('prueba').doc(this.data).update({
                         Nombre: this.nombre,
-                        Activo: a /*this.activoo*/,
-                        Inactivo: b /*this.inactivoo*/
+                        Activo: this.act/*this.activoo*/,
+                        Inactivo: this.inac /*this.inactivoo*/
                     }).then(res => alert('Cliente Actualizado'));
                     this.pepe();
                     this.dismiss();
@@ -77,15 +77,15 @@ export class EditarPage implements OnInit {
                     task.snapshotChanges().pipe(
                         finalize(() => this.uploadURL = fileRef.getDownloadURL())
                     ).subscribe();
-                    const a = (document.getElementById('active') as HTMLIonRadioElement).checked;
-                    const b = (document.getElementById('inactive') as HTMLIonRadioElement).checked;
-                    console.log(a);
-                    console.log(b);
+                    this.act = (document.getElementById('active') as HTMLIonRadioElement).checked;
+                    this.inac = (document.getElementById('inactive') as HTMLIonRadioElement).checked;
+                    console.log(this.act);
+                    console.log(this.inac);
                     this.AFS.collection('prueba').doc(this.data).update({
                         Nombre: this.nombre.toLowerCase(),
                         Url: filepath,
-                        Activo: a/*this.activoo*/,
-                        Inactivo: b /*this.inactivoo */
+                        Activo: this.act/*this.activoo*/,
+                        Inactivo: this.inac /*this.inactivoo */
                     });
                     const ref = localStorage.getItem('refSt');
                     this.storage.ref(ref).delete();
@@ -143,3 +143,4 @@ export class EditarPage implements OnInit {
         }
     }
 }
+
